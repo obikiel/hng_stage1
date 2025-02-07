@@ -75,9 +75,10 @@ def get_number_properties(n):
     return properties
 
 def is_armstrong_number(n):
-    digits = [int(d) for d in str(n)]
+    n_abs = abs(n)  # Use absolute value to ignore the negative sign
+    digits = [int(d) for d in str(n_abs)]  # Convert digits to integers
     num_digits = len(digits)
-    return n == sum(d ** num_digits for d in digits)
+    return n_abs == sum(d ** num_digits for d in digits) 
 
 def get_fun_fact(n):
     url = f"http://numbersapi.com/{n}/math"
