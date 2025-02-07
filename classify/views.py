@@ -80,8 +80,10 @@ def is_armstrong_number(n):
     return n == sum(d ** num_digits for d in digits)
 
 def get_fun_fact(n):
-    url = f"http://numbersapi.com/{n}"
-    response = requests.get(url)
-    if response.status_code == 200:
+    url = f"http://numbersapi.com/{n}/math"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error for bad responses
         return response.text
-    return "No fun fact available."
+    except requests.RequestException as e:
+        return f"No fun fact available due to an error: {e}"
